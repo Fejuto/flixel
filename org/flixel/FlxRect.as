@@ -1,19 +1,17 @@
-package org.flixel
-{
+package org.flixel {
 	/**
 	 * Stores a rectangle.
 	 */
-	public class FlxRect extends FlxPoint
-	{
+	public class FlxRect extends FlxPoint {
 		/**
 		 * @default 0
 		 */
-		public var width:Number;
+		public var width : Number;
 		/**
 		 * @default 0
 		 */
-		public var height:Number;
-		
+		public var height : Number;
+
 		/**
 		 * Instantiate a new rectangle.
 		 * 
@@ -22,43 +20,54 @@ package org.flixel
 		 * @param	Width	Desired width of the rectangle.
 		 * @param	Height	Desired height of the rectangle.
 		 */
-		public function FlxRect(X:Number=0, Y:Number=0, Width:Number=0, Height:Number=0)
-		{
-			super(X,Y);
+		public function FlxRect(X : Number = 0, Y : Number = 0, Width : Number = 0, Height : Number = 0) {
+			super(X, Y);
 			width = Width;
 			height = Height;
 		}
-		
+
 		/**
 		 * The X coordinate of the left side of the rectangle.  Read-only.
 		 */
-		public function get left():Number
-		{
+		public function get left() : Number {
 			return x;
 		}
-		
+
 		/**
 		 * The X coordinate of the right side of the rectangle.  Read-only.
 		 */
-		public function get right():Number
-		{
+		public function get right() : Number {
 			return x + width;
 		}
-		
+
 		/**
 		 * The Y coordinate of the top of the rectangle.  Read-only.
 		 */
-		public function get top():Number
-		{
+		public function get top() : Number {
 			return y;
 		}
-		
+
 		/**
 		 * The Y coordinate of the bottom of the rectangle.  Read-only.
 		 */
-		public function get bottom():Number
-		{
+		public function get bottom() : Number {
 			return y + height;
+		}
+
+		public function get cx() : Number {
+			return x + width / 2;
+		}
+
+		public function set cx(value : Number) : void {
+			x = value - width / 2;
+		}
+
+		public function get cy() : Number {
+			return y + height / 2;
+		}
+
+		public function set cy(value : Number) : void {
+			y = value - height / 2;
 		}
 	}
 }
