@@ -767,5 +767,9 @@ package org.flixel
 			while(i < l)
 				gamepads[i++].update();
 		}
+		
+		static public function resetCache():void{
+			_cache = new Object();
+		}
 	}
 }
