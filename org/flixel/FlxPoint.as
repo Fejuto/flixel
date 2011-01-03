@@ -1,5 +1,5 @@
-package org.flixel
-{
+package org.flixel {
+	import flash.geom.Point;
 	/**
 	 * Stores a 2D floating point coordinate.
 	 */
@@ -32,6 +32,22 @@ package org.flixel
 		public function toString():String
 		{
 			return FlxU.getClassName(this,true);
+		}
+		
+		public function toPoint(p:Point = null):Point{
+			if(!p){
+				p = new Point(x,y);
+			} else {
+				p.x = x;
+				p.y = y;
+			}
+			
+			return p;
+		}
+		
+		public function fromPoint(p:Point):void{
+			x = p.x;
+			y = p.y;
 		}
 	}
 }
