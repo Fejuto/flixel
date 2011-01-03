@@ -263,6 +263,8 @@ package org.flixel
 						_mtx.translate(-bw2,-bh2);
 						_mtx.rotate(ba*0.017453293);
 						_mtx.translate(max*c+gxc, gyc);
+						_mtx.tx = Math.round(_mtx.tx); 
+						_mtx.ty = Math.round(_mtx.ty);
 						ba += _bakedRotation;
 						_pixels.draw(brush,_mtx,null,null,null,AntiAliasing);
 						c++;
