@@ -202,6 +202,14 @@ package org.flixel
 			return ((Y < 0)?-angle:angle)*57.2957796;
 		};
 		
+		static public function toDegrees(radians:Number):Number{
+			return  radians / 3.14159265 * 180;
+		}
+		
+		static public function toRadians(degrees:Number):Number{
+			return degrees * 3.14159265 / 180;
+		}
+		
 		/**
 		 * Generate a Flash <code>uint</code> color from RGBA components.
 		 * 
