@@ -545,5 +545,17 @@ package org.flixel
 				return -_sortOrder;
 			return 0;
 		}
+		
+		override public function overlapsPoint(X:Number,Y:Number,PerPixel:Boolean = false):Boolean
+		{
+			var overlaps:Boolean = false;
+			for each(var m:FlxObject in members){
+				overlaps ||= m.overlapsPoint(X, Y, PerPixel);
+				if(overlaps){
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }
