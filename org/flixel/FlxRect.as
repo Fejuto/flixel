@@ -33,11 +33,19 @@ package org.flixel {
 			return x;
 		}
 
+		public function set left(value : Number) : void {
+			x = value;
+		}
+
 		/**
 		 * The X coordinate of the right side of the rectangle.  Read-only.
 		 */
 		public function get right() : Number {
 			return x + width;
+		}
+
+		public function set right(value : Number) : void {
+			x = value - width;
 		}
 
 		/**
@@ -47,11 +55,19 @@ package org.flixel {
 			return y;
 		}
 
+		public function set top(value : Number) : void {
+			y = value;
+		}
+
 		/**
 		 * The Y coordinate of the bottom of the rectangle.  Read-only.
 		 */
 		public function get bottom() : Number {
 			return y + height;
+		}
+
+		public function set bottom(value : Number) : void {
+			y = value - height;
 		}
 
 		public function get cx() : Number {
