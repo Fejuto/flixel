@@ -22,7 +22,7 @@ package org.flixel {
 		private var _closed : Vector.<FlxPathfindingNode>;
 		private var _start : FlxPathfindingNode;
 
-		public function findPath(startPoint : Point, endPoint : Point, allowDiagonal : Boolean = true) : Array {
+		public function findPath(startPoint : Point, endPoint : Point, allowDiagonal : Boolean = true) : Vector.<Point> {
 			if (startPoint.x < 0)
 				startPoint.x = 0;
 			if (startPoint.x > _map.widthInTiles - 1)
@@ -121,6 +121,40 @@ package org.flixel {
 			// returns the path to the node nearest to the goal
 		}
 
+		public static function filterPath(path : Vector.<Point>, maxSkips:int = int.MAX_VALUE) : Vector.<Point> {
+			if (path.length <= 2) {
+				return path;
+			}
+			var newPath : Vector.<Point> = new Vector.<Point>();
+			newPath.push(path[0]);
+			var skips:int = 0;
+			for (var i : int = 1; i < path.length - 1; i++) {
+				if (!canRemovePathPoint(path[i - 1], path[i], path[i + 1]) || skips > maxSkips) {
+					newPath.push(path[i]);
+					skips = 0;
+				}else{
+					skips++;
+				}
+			}
+			newPath.push(path[path.length - 1]);
+			return newPath;
+		}
+
+		private static function canRemovePathPoint(previous : Point, current : Point, next : Point) : Boolean {
+			var dx : Number = Math.abs(previous.x - next.x);
+			var dy : Number = Math.abs(previous.y - next.y);
+			if ( dx == 2 && dy == 2) {
+				return true;
+			}
+			if ( previous.y == current.y && current.y == next.y) {
+				return true;
+			}
+			if ( previous.x == current.x && current.x == next.x) {
+				return true;
+			}
+			return false;
+		}
+
 		private function getNodeAt(x : int, y : int) : FlxPathfindingNode {
 			return _pathfindingNodes[x + y * _map.widthInTiles];
 		}
@@ -133,8 +167,8 @@ package org.flixel {
 		}
 
 		// returns an array from a linked list of nodes
-		private function rebuildPath(end : FlxPathfindingNode) : Array {
-			var path : Array = new Array();
+		private function rebuildPath(end : FlxPathfindingNode) : Vector.<Point> {
+			var path : Vector.<Point> = new  Vector.<Point>();
 			if (end == null) {
 				return path;
 			}
@@ -146,11 +180,11 @@ package org.flixel {
 			return path.reverse();
 		}
 
-		private function getNeighbors(node : FlxPathfindingNode, allowDiagonal : Boolean) : Array {
+		private function getNeighbors(node : FlxPathfindingNode, allowDiagonal : Boolean) : Vector.<FlxPathfindingNode> {
 			var x : int = node.x;
 			var y : int = node.y;
 			var currentNode : FlxPathfindingNode;
-			var neighbors : Array = new Array(8);
+			var neighbors : Vector.<FlxPathfindingNode> = new  Vector.<FlxPathfindingNode>();
 			if (x > 0) {
 				currentNode = getNodeAt(x - 1, y);
 				if (isWalkable(currentNode)) {
