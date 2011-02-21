@@ -162,7 +162,11 @@ package org.flixel {
 			}
 			
 			//Figure out the size of the tiles
-			_pixels = FlxG.addBitmap(TileGraphic);
+			if(TileGraphic != null){
+				_pixels = FlxG.addBitmap(TileGraphic);
+			}else{
+				_pixels = FlxG.createBitmap(TileWidth * 2, TileHeight, 0);
+			}
 			_tileWidth = TileWidth;
 			if(_tileWidth == 0)
 				_tileWidth = _pixels.height;
